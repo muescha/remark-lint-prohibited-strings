@@ -7,17 +7,23 @@ Example configuration:
   [
     require("remark-lint-prohibited-strings"),
     [
-      { no: "End-Of-Life", yes: "End-of-Life" },
-      { no: "End-of-life", yes: "End-of-Life" },
-      { no: "Github", yes: "GitHub" },
-      { no: "Javascript", yes: "JavaScript" },
-      { no: "Node.JS", yes: "Node.js" },
-      { no: "Rfc", yes: "RFC" },
-      { no: "[Rr][Ff][Cc]\\d+", yes: "RFC <number>" },
+      { no: "end-of-life", yes: "End-of-Life" },
+      { no: "github", yes: "GitHub" },
+      { no: "javascript", yes: "JavaScript" },
+      { no: "node\\.js", yes: "Node.js" },
       { no: "rfc", yes: "RFC" },
-      { no: "UNIX", yes: "Unix" },
+      { no: "RFC\\d+", yes: "RFC <number>" },
       { no: "unix", yes: "Unix" },
       { no: "v8", yes: "V8" }
     ]
   ]
   ```
+
+  The `no` values are strings but regular expression special characters are
+  respected (which may require special escaping as can be seen in the example
+  above.
+
+  The `no` values are treated as case-insensitive values. If a string
+  case-insensitive matches the `no` value, it will be flagged as an error unless
+  the string also case-sensitive matches the `yes` value.
+  

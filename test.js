@@ -168,5 +168,16 @@ test('remark-lint-prohibited-strings', (t) => {
       'should allow flagging of apostrophes as final characters in "no" string'
     );
   }
+
+  {
+    const contents = 'Is it _WordPress_ or is it _WoRdPrEsS_?';
+    t.deepEqual(
+      processorWithOptions([{ no: 'wordpress', yes: 'WordPress' }])
+        .processSync(vfile({ path: path, contents: contents }))
+        .messages.map(String),
+      [ 'fhqwhgads.md:1:29-1:38: Use "WordPress" instead of "WoRdPrEsS"' ],
+      'should do case-insensitive matching'
+    );
+  }
   t.end();
 });

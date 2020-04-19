@@ -19,11 +19,11 @@ function testProhibited(val, content) {
     regexpString += '\\b';
   }
   regexpString += '(\\.\\w)?';
-  const re = new RegExp(regexpString, 'g');
+  const re = new RegExp(regexpString, 'gi');
 
   let result = null;
   while (result = re.exec(content)) {
-    if (!result[1] && !result[3]) {
+    if (!result[1] && !result[3] && result[2] !== val.yes) {
       return result[2];
     }
   }
